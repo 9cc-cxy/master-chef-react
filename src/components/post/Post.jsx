@@ -23,7 +23,7 @@ const Post = ({ post }) => {
     <div className="post">
       {/* Post header with profile picture and username */}
       <div className="post-header">
-        <Link to={`/profile/${post.username}`} className="profile-link">
+        <Link to={`/profile/${post.id}`} className="profile-link">
           <img
             src={post.profilePic}
             alt={`${post.username}'s profile`}

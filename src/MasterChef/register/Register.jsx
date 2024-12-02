@@ -4,7 +4,7 @@ import "./register.css";
 import axios from "axios";
 import React from "react";
 
-const Register = () => {
+export default function Register() {
   const [inputs, setInputs] = useState({
     username: "",
     email: "",
@@ -74,5 +74,3 @@ const Register = () => {
     </div>
   );
 };
-
-export default Register;

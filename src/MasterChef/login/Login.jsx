@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./login.css";
 import axios from "axios";
+import React from "react";
 
 const Login = () => {
   const [inputs, setInputs] = useState({
@@ -35,10 +36,10 @@ const Login = () => {
             Discover a world of culinary delights and connect with fellow food
             enthusiasts. Log in to share your recipes and explore the community.
           </p>
-          <span>Don't have an account?</span>
+          <span>Don't have an account? &nbsp;
           <Link to="/register">
-            <button>Register</button>
-          </Link>
+            Register
+          </Link></span>
         </div>
         <div className="right">
           <h1>Login</h1>
