@@ -1,0 +1,63 @@
+.theme-light .home {
+  padding: 20px 70px;
+  background-color: white;
+  min-height: 100vh;
+  color: #000;
+  border-color: lightgray;
+}
+
+.theme-light .home .logo {
+  color: darkblue;
+}
+
+.theme-light .home .text-soft {
+  color: #555;
+}
+
+.theme-light .home .bg-soft {
+  background-color: #f6f3f3;
+}
+
+@media (max-width: 480px) {
+  .theme-light .home {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 960px) {
+  .theme-light .home {
+    padding: 20px;
+  }
+}
+
+.theme-dark .home {
+  padding: 20px 70px;
+  background-color: #222;
+  min-height: 100vh;
+  color: whitesmoke;
+  border-color: #444;
+}
+
+.theme-dark .home .logo {
+  color: white;
+}
+
+.theme-dark .home .text-soft {
+  color: lightgray;
+}
+
+.theme-dark .home .bg-soft {
+  background-color: #333;
+}
+
+@media (max-width: 480px) {
+  .theme-dark .home {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 960px) {
+  .theme-dark .home {
+    padding: 20px;
+  }
+}
