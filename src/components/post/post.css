@@ -1,0 +1,117 @@
+.post {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .post-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .profile-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    gap: 10px;
+  }
+  
+  .profile-pic {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+  }
+  
+  .username {
+    font-weight: bold;
+  }
+  
+  .post-image img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 16px;
+  }
+  
+  .post-content {
+    margin-bottom: 16px;
+  }
+  
+  .post-actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .like-button,
+  .comment-button {
+    background-color: rgb(103, 189, 229);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  /* Container for the add comment section */
+.add-comment {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  
+  /* Input field for typing comments */
+  .add-comment input {
+    flex: 1;
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+  
+  .add-comment input:focus {
+    border-color: rgb(103, 189, 229);
+  }
+  
+  /* Add Comment button */
+  .add-comment button {
+    padding: 8px 16px;
+    font-size: 14px;
+    color: white;
+    background-color: rgb(103, 189, 229);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .add-comment button:active {
+    transform: scale(0.95);
+  }
+  
+  
+  .post-comments {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #ddd;
+  }
+  
+  .comment {
+    margin-bottom: 8px;
+  }
+  
+  .comment strong {
+    color: #333;
+  }

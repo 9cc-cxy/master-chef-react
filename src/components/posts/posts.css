@@ -1,0 +1,17 @@
+.posts{
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.error {
+  color: red;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.loading {
+  font-size: 1rem;
+  text-align: center;
+  color: #555;
+}
