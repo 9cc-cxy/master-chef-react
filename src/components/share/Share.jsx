@@ -5,16 +5,23 @@ import Map from "../../assets/map.png";
 import Friend from "../../assets/friend.png";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { makeRequest } from "../../axios";
+import * as postClient from "../../clients/PostClient";
+import * as userClient from "../../clients/UserClient";
+import { useSelector } from "react-redux";
 
 const Share = () => {
+  const { currentUser } = useSelector((state) => state.accountReducer);
   const [file, setFile] = useState(null);
-  const [desc, setDesc] = useState("");
+  const [content, setContent] = useState("");
 
   const upload = async () => {
     try {
       const formData = new FormData();
       formData.append("file", file);
-      const res = await makeRequest.post("/upload", formData);
+      for (let pair of formData.entries()) {
+        console.log(pair[0] + ": " + pair[1]);
+      }
+      const res = await postClient.uploadImg(formData);
       return res.data;
     } catch (err) {
       console.log(err);
@@ -25,7 +32,8 @@ const Share = () => {
 
   const mutation = useMutation(
     (newPost) => {
-      return makeRequest.post("/posts", newPost);
+      console.log(newPost);
+      return userClient.createPost(currentUser.user_id, newPost);
     },
     {
       onSuccess: () => {
@@ -38,8 +46,9 @@ const Share = () => {
     e.preventDefault();
     let imgUrl = "";
     if (file) imgUrl = await upload();
-    mutation.mutate({ desc, img: imgUrl });
-    setDesc("");
+    console.log("Selected file:", file);
+    mutation.mutate({ content, img: imgUrl });
+    setContent("");
     setFile(null);
   };
 
@@ -52,8 +61,8 @@ const Share = () => {
             <input
               type="text"
               placeholder="What's on your mind?"
-              onChange={(e) => setDesc(e.target.value)}
-              value={desc}
+              onChange={(e) => setContent(e.target.value)}
+              value={content}
             />
           </div>
         </div>

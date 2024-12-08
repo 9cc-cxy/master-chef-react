@@ -1,49 +1,105 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { IoExitOutline } from "react-icons/io5";
 import "./navbar.css";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
-import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
-import GridViewOutlinedIcon from "@mui/icons-material/GridViewOutlined";
-import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
-import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { Link } from "react-router-dom";
-import profilePic from "../../assets/profilePic.png";
+import { setCurrentUser } from "../../redux/AccountReducer";
+import * as userClient from "../../clients/UserClient";
 
 const Navbar = () => {
-  const [darkMode, setDarkMode] = useState(false); // Manage dark mode locally
+  const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { currentUser } = useSelector((state) => state.accountReducer);
 
-  const toggleDarkMode = () => {
-    setDarkMode((prev) => !prev); // Toggle dark mode on click
+  const handleSearchSubmit = async (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      // Navigate to the search page with the query
+      navigate(`/search?criteria=${encodeURIComponent(searchQuery)}`);
+    } else {
+      // Navigate to the empty search page
+      navigate("/search");
+    }
+  };
+
+  const logout = async (e) => {
+    e.preventDefault();
+    if (currentUser) {
+      await userClient.logout();
+      dispatch(setCurrentUser(null));
+      navigate("/home");
+    }
   };
 
   return (
-    <div className={`navbar ${darkMode ? "dark" : ""}`}>
+    <div className="navbar">
       <div className="navbar-left">
         <span>masterchef </span>
-        <HomeOutlinedIcon />
-        {darkMode ? (
-          <WbSunnyOutlinedIcon onClick={toggleDarkMode} />
-        ) : (
-          <DarkModeOutlinedIcon onClick={toggleDarkMode} />
+        <Link to={currentUser?.role === "Admin" ? "/admin" : "/home"}>
+          <HomeOutlinedIcon />
+        </Link>
+        {(!currentUser || currentUser.role !== "Admin") && (
+          <div className="search">
+            <form onSubmit={handleSearchSubmit} className="search-form">
+              <SearchOutlinedIcon className="search-icon" />
+              <input
+                type="text"
+                placeholder={
+                  currentUser?.role === "Admin"
+                    ? "Search by username..."
+                    : "Search..."
+                }
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="search-input"
+              />
+            </form>
+          </div>
         )}
-        <GridViewOutlinedIcon />
-        <div className="search">
-          <SearchOutlinedIcon />
-          <input type="text" placeholder="Search..." />
-        </div>
       </div>
       <div className="navbar-right">
-        <PersonOutlinedIcon />
-        <EmailOutlinedIcon />
-        <NotificationsOutlinedIcon />
-        <div className="user">
-          <Link to="/profile/:uid" className="profile-link">
-            <img src={profilePic} alt="User Profile" />
-            <span>John Doe</span>
-          </Link>
-        </div>
+        {currentUser ? (
+          <div className="user">
+            <Link
+              to={`/profile`}
+              className="profile-link"
+            >
+              <img
+                src={
+                  currentUser?.profile_pic ||
+                  "https://images.pexels.com/photos/14028501/pexels-photo-14028501.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+                }
+                alt="User Profile"
+              />
+              <span>{currentUser?.username}</span>
+            </Link>
+            <button
+              className="logout-button"
+              onClick={logout}
+            >
+              Log out
+              <IoExitOutline />
+            </button>
+          </div>
+        ) : (
+          <div className="user">
+            <Link to="/login">
+              <button
+                style={{
+                  border: "0px",
+                  background: "transparent",
+                  cursor: "pointer",
+                }}
+              >
+                Log in
+              </button>
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );

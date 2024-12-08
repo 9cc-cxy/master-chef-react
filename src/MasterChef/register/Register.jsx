@@ -3,26 +3,32 @@ import { Link } from "react-router-dom";
 import "./register.css";
 import axios from "axios";
 import React from "react";
+import { register } from "../../clients/UserClient";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
   const [inputs, setInputs] = useState({
     username: "",
-    email: "",
+    role: "",
     password: "",
   });
   const [err, setErr] = useState(null);
+  const [msg, setMsg] = useState(null);
+  const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
-
-  const handleClick = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      await axios.post("/api/auth/register", inputs);
-    } catch (err) {
-      setErr(err.response.data);
+      const response = await register(inputs);
+      console.log("User registered:", response);
+      setErr(null);
+      setMsg("Register Successful. Redirecting to log in...")
+      setTimeout(() => {
+        navigate("/login");
+      }, 3000);
+    } catch (error) {
+      console.error("Registration error:", error.response?.data || error.message);
+      setErr(error.response?.data?.message || "Register failed. Please try again.");
     }
   };
 
@@ -46,31 +52,54 @@ export default function Register() {
         </div>
         <div className="right">
           <h1>Register</h1>
-          <form>
+          {err && <p className="error">{err}</p>}
+          {msg && <p className="success-msg">{msg}</p>}
+          <form onSubmit={handleSubmit}>
             <input
               type="text"
               placeholder="Username"
               name="username"
-              onChange={handleChange}
+              value={inputs.username}
+              onChange={(e) => setInputs({...inputs, username: e.target.value})}
+              required
             />
-
             <input
               type="password"
               placeholder="Password"
               name="password"
-              onChange={handleChange}
+              value={inputs.password}
+              onChange={(e) => setInputs({...inputs, password: e.target.value})}
+              required
             />
-            <input
-              type="text"
-              placeholder="Role"
-              name="role"
-              onChange={handleChange}
-            />
-            {err && err}
-            <button>Register</button>
+            <div className="radio-container">
+              Select your role:
+              <label>
+                <input
+                  type="radio"
+                  id="chef-role"
+                  name="role"
+                  value="Chef"
+                  onChange={(e) => setInputs({...inputs, role: e.target.value})}
+                  checked={inputs.role === "Chef"}
+                />
+                Chef
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  id="user-role"
+                  name="role"
+                  value="User"
+                  onChange={(e) => setInputs({...inputs, role: e.target.value})}
+                  checked={inputs.role === "User"}
+                />
+                User
+              </label>
+            </div>
+            <button type="submit">Register</button>
           </form>
         </div>
       </div>
     </div>
   );
-};
+}

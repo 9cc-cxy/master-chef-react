@@ -1,4 +1,5 @@
 .post {
+    position: relative;
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 16px;
@@ -6,7 +7,24 @@
     background: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
-  
+  .delete-button-container {
+    position: absolute;
+    top: 30px;
+    right: 35px;
+  }
+  .delete-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .delete-button-icon {
+    font-size: 1.5rem;
+    color: #888;
+    transition: color 0.3s ease, transform 0.2s ease;
+  }
   .post-header {
     display: flex;
     align-items: center;
@@ -30,6 +48,7 @@
   
   .username {
     font-weight: bold;
+    margin-bottom: 2px;
   }
   
   .post-image img {
@@ -47,15 +66,44 @@
     gap: 10px;
   }
   
-  .like-button,
-  .comment-button {
-    background-color: rgb(103, 189, 229);
-    color: white;
+  .like-container,
+  .comment-container {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .like-button {
+    background: transparent;
     border: none;
-    padding: 8px 16px;
-    border-radius: 5px;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+  }
+
+  .like-counter,
+  .like-button-icon {
+    color: #888;
+  }
+
+  .comment-button {
+    background-color: transparent;
+    color: #888;
+    border: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    margin-left: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+  }
+
+  .comment-icon {
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
   }
 
   /* Container for the add comment section */
@@ -115,3 +163,20 @@
   .comment strong {
     color: #333;
   }
+
+  .time-created p {
+    display: block;
+    margin-top: 5px;
+    color: gray; 
+  }
+
+  .api-recipe-instructions {
+    margin-left: 20px;
+    margin-top: 10px;
+  }
+
+  .no-underline {
+    text-decoration: none; /* Removes the underline */
+    color: inherit;        /* Keeps the text color consistent */
+  }
+  
