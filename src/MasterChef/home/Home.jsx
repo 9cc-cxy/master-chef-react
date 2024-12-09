@@ -33,6 +33,11 @@ const Home = ({ }) => {
       <Weather />
       {currentUser && currentUser.role === "Chef" && <Share /> }
       <Posts posts={posts}/>
+      <div>
+        <p>Team Members: Xinyu Cheng, Zhihao Wang, Shiyu Chen</p>
+        <a className="react-git-link" href="https://github.com/9cc-cxy/master-chef-react">React Git Repo</a>
+        <a className="node-git-link" href="https://github.com/9cc-cxy/master-chef-node-server-app">Node Git Repo</a>
+      </div>
     </div>
   );
 };
