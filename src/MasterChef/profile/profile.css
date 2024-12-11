@@ -1,42 +1,51 @@
-.profile {
-    .info {
-        width: 90%;
+.profile-page {
+    margin-top: 10px;
+    margin: 0 auto;
+    width: 100%; 
+    max-width: 1200px;
+    padding: 20px 20px; 
+    
+  }
+
+.chef-profile {
+    .chef-info {
+        width: 100%;
         height: 200px;
         margin: 0 auto;
         padding-top: 60px;
         position: relative; 
     }
 
-    .info .cover {
+    .chef-info .cover {
         width: 100%;
         height: 100%;
         border-radius: 15px;
         object-fit: cover;
         position: absolute;
-        top: 50px;
+        top: 35px;
         left: 0;
         z-index: 1;
         filter: blur(1px) brightness(55%) contrast(90%) grayscale(0%) opacity(90%) sepia(20%) drop-shadow(0px 0px 0px #b7b6b6);
     }
 
-    .info .profilePhoto {
+    .chef-info .profilePhoto {
         width: 150px;
         height: 150px;
         border-radius: 50%;
         object-fit: cover;
         position: absolute;
-        top: 180px;
-        left: 30px;
+        top: 165px;
+        left: 50px;
         transform: translateY(-50%);
         border: 1px solid rgba(229, 229, 229, 0.938);
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
         z-index: 2; 
     }
 
-    .infoContainer {
+    .chef-infoContainer {
         position: absolute;
-        top: 105px;
-        left: 230px;
+        top: 78px;
+        left: 250px;
         display: flex;
         flex-direction: column;
         gap: 15px;
@@ -44,33 +53,45 @@
         color: white;
     }
 
-    .username {
+    .chef-username-container {
         margin-top: 10px;
-        font-size: 26px;
-        font-weight: 800;
-        margin-bottom: 13px;
+        font-size: 22px;
+        font-weight: 600;
+        margin-bottom: 0px;
     }
 
-    .identity,
-    .cuisine {
-        font-size: 14px;
+    .chef-identity {
+        font-size: 12px;
         font-weight: 300;
-        line-height: 0.5;
+        line-height: 0.1;
+        margin-bottom: 2px;
+    }
+    .chef-cuisine {
+        font-size: 12px;
+        font-weight: 300;
+        line-height: 0.1;
+        margin-bottom: 2px;
     }
 
-    .description {
+    .chef-description {
         font-size: 16px;
-        font-weight: 450;
+        font-weight: 400;
+        margin-bottom: -5px;
     }
 
-    .profileEdit {
+    .chef-follow-count {
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    .chef-profileEdit {
         position: absolute;
         bottom: -20px;
         right: 40px;
         z-index: 3;
     }
 
-    .profileEdit button {
+    .chef-profileEdit button {
         background: transparent;
         color: white;
         border: 1px solid white;
@@ -81,17 +102,193 @@
         align-items: center;
         gap: 5px;
         font-size: 14px;
+        top: 180px;
     }
 
-    .profileEdit button:hover {
+    .chef-profileEdit button:hover {
         background: rgba(255, 255, 255, 0.1); 
         border-color: rgba(255, 255, 255, 0.8);
     }
+    .chef-follow {
+        position: absolute;
+        bottom: -20px;
+        right: 165px;
+        z-index: 3;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    .chef-follow button {
+        background: rgba(255, 255, 255, 0.8);
+        color: rgba(0, 0, 0, 0.8);
+        border: 1px solid white;
+        padding: 5px 10px;
+        border-radius: 15px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 14px;
+    }
+    .chef-follow button:hover {
+        background: rgba(249, 249, 249, 0.2); 
+        color: white;
+        border-color: rgba(255, 255, 255, 0.8);
+    }
+    .chef-follow svg {
+        font-size: 16px;
+        color: rgba(0, 0, 0, 0.8);
+    }
+    .chef-follow button:hover svg {
+        color: white;
+    }
+    .confirmation-modal {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+    }
+    
+    .modal-actions {
+        display: flex;
+        justify-content: space-between;
+        gap: 5px;
+        margin-top: 10px;
+    }
+    
+    .modal-actions button {
+        margin-top: 10px;
+        padding: 10px 20px;
+        border: 1px solid #a4a4a4;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+    .modal-actions button:first-child {
+        background-color: #9f9e9e;
+        color: white;
+
+    }
+    
+    .modal-actions button:last-child {
+        background-color: #fdfefd;
+        color: black;
+    }
+}
+
+.profile-chefPost {
+    margin-top: 300px;
+}
+
+.user-profile{
+    .user-profile-container {
+        width: 100%;
+        height: 200px;
+        margin: 0 auto;
+        padding-top: 60px;
+        position: relative; 
+    }
+    .user-profile-container .cover {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        top: 50px;
+        left: 0;
+        z-index: 1;
+        filter: blur(1px) brightness(55%) contrast(90%) grayscale(0%) opacity(90%) sepia(20%) drop-shadow(0px 0px 0px #b7b6b6);
+    }
+
+    .user-profile-container .profilePhoto {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        position: absolute;
+        top: 300px;
+        left: 30px;
+        transform: translateY(-50%);
+        border: 3px solid rgba(229, 229, 229, 0.938);
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        z-index: 2; 
+    }
+    .user-profile-info {
+        margin-top: 370px;
+        flex: 1 1 100%;
+        flex-direction: column;
+        text-align: left;
+        gap: 50px;
+        justify-content: space-between; 
+    }
+    
+    .user-profile-info > div {
+        flex: 1 1 100%;
+        text-align: left;
+        margin-bottom: 20px;
+    }
+    
+    .user-profile-info h1 {
+        width: 100%;
+        text-align: left;
+        margin-bottom: 40px;
+    }
+
+    .user-profile-info .label {
+        font-size: 20px;
+        font-weight: 600;
+    }
+    
+    .user-profile-info .value {
+        font-size: 20px;
+        font-weight: 400;
+        margin-left: 15px;
+        color: #474747;
+    }
+    .user-profileEdit {
+        position: absolute;
+        bottom: -20px;
+        right: 40px;
+        z-index: 3;
+    }
+
+    .user-profileEdit button {
+        background: transparent;
+        color: white;
+        border: 1px solid white;
+        padding: 5px 10px;
+        border-radius: 15px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 14px;
+        top: 180px;
+    }
+
+    .user-profileEdit button:hover {
+        background: rgba(255, 255, 255, 0.1); 
+        border-color: rgba(255, 255, 255, 0.8);
+    }
+
+}
+
+.profileEditor-page {
+    margin-top: 10px;
+    margin: 0 auto;
+    width: 100%; 
+    max-width: 1200px;
+    padding: 20px 20px; 
+    
 }
 
 .profileEditor{
     .infoEdit {
-        width: 90%;
+        width: 100%;
         height: 200px;
         margin: 0 auto;
         padding-top: 60px;
@@ -122,7 +319,7 @@
         z-index: 2; 
     }
     .infoEditContainer {
-        margin-top: 325px;
+        margin-top: 340px;
         display: flex;
         flex-wrap: wrap;
         gap: 20px;
@@ -147,17 +344,17 @@
         outline: none;
         background: transparent;
         width: 100%; 
-        font-size: 18px;
+        font-size: 16px;
         padding: 5px 0; 
         margin-top: 10px; 
     }
 
     .infoEditContainer span {
         font-size: 20px;
-        font-weight: 500;
+        font-weight: 400;
     }
     
-    .password, .description, .cuisine, .username, .email {
+    .infoEdit-password, .infoEdit-description, .infoEdit-cuisine, .infoEdit-username, .infoEdit-email {
         padding: 10px 0;
         font-size: 20px;
         font-weight: 400;
@@ -166,34 +363,37 @@
     .infoEditContainer input:focus {
         border-bottom: 1.5px solid darkgray;
     }
-    .editButton {
+    .infoEdit-editButton {
         display: flex;
         justify-content: flex-end;
         gap: 20px;
         margin-top: 20px;
+        margin-bottom: 30px;
+        transform: translateY(-10px);
     }
-    .editButton button {
+    .infoEdit-editButton button {
         padding: 10px 20px;
         border: 1px solid #d4d4d4;
         border-radius: 15px;
-        background-color: #7e7e7e;
+        background-color: #959595;
         color: rgb(251, 251, 251);
         font-size: 16px; 
         font-weight: 550;
+        width: 100px;
         cursor: pointer;
         transition: background-color 0.3s ease;
     }
     
-    .editButton button.save:hover {
+    .infoEdit-editButton button.save:hover {
         background-color: #b3b2b2;
     }
     
-    .editButton button.cancel {
+    .infoEdit-editButton button.cancel {
         background-color: transparent;
         color:rgb(90, 90, 90);
     }
     
-    .editButton button.cancel:hover {
+    .infoEdit-editButton button.cancel:hover {
         background-color: #ecececee;
     }
 
