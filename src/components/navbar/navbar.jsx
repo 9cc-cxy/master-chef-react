@@ -65,7 +65,7 @@ const Navbar = () => {
         {currentUser ? (
           <div className="user">
             <Link
-              to={`/profile`}
+              to={currentUser?.role === "Admin" ? `/admin` : `/profile`}
               className="profile-link"
             >
               <img

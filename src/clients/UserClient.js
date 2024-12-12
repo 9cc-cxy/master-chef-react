@@ -89,3 +89,22 @@ export const register = async (user) => {
   const response = await axiosWithCredentials.post(`${USERS_API}/register`, user);
   return response.data;
 };
+
+export const uploadImg = async (userId, selectedFile) => {
+  const formData = new FormData();
+  formData.append("file", selectedFile);
+  console.log("Sending request with formData:");
+  for (let pair of formData.entries()) {
+      console.log(`${pair[0]}:`, pair[1]);
+    }
+  const response = await axiosWithCredentials.post(
+    `${USERS_API}/${userId}/upload`,
+    formData,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
+  return response.data;
+};

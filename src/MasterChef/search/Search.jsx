@@ -74,19 +74,20 @@ const Search = ({ allUsers, updateFollowing }) => {
                   margin: "20px" 
                 }}>
                   <div style={{ display: "flex", alignItems: "center" }}>
-                    <img src="../" alt={`${user.username}'s profile`} className="profile-pic" style={{ 
+                    <img src={user.profile_pic} alt={`${user.username}'s profile`} className="profile-pic" style={{ 
                       height: "70px", 
                       width: "70px", 
                       marginRight: "10px" 
                     }} />
-                    <span className="username">{user.username} | Specialty: {user.specialty_cuisine}</span>
+                    <span className="username">{user.username} </span>&nbsp;
+                    {user.role === "Chef" && (<span className="username"> | Specialty: {user.specialty_cuisine}</span>)}
                   </div>
-                  <Button onClick={(event) => {
+                  {user.role === "Chef" && <Button onClick={(event) => {
                         event.preventDefault();
                         updateFollowing(user.user_id, !user.followed);
                       }}>
                       {currentUser && (user.followed ? "Unfollow" : "Follow")}
-                  </Button>
+                  </Button>}
                 </Link>
               </div>
             ))

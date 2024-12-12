@@ -49,7 +49,7 @@ export const getCommentsByPost = async (postId) => {
     return response.data;
 }
 
-export const commentPost = async (postId, userId, content, image = null) => {
+export const commentPost = async (postId, userId, content, image) => {
     let imgUrl = null;
     if (image) {
         imgUrl = await uploadImg(image);
@@ -66,7 +66,10 @@ export const commentPost = async (postId, userId, content, image = null) => {
 export const uploadImg = async (selectedFile) => {
     const formData = new FormData();
     formData.append("file", selectedFile);
-    console.log("Sending request with formData:", formData);
+    console.log("Sending request with formData:");
+    for (let pair of formData.entries()) {
+        console.log(`${pair[0]}:`, pair[1]);
+      }
     const response = await axiosWithCredentials.post(
       `${POSTS_API}/upload`,
       formData,

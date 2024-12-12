@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import "./profile.css"
 import { MdOutlineModeEdit, MdOutlineModeEditOutline } from "react-icons/md";
 import { HiOutlinePlus } from "react-icons/hi";
-import { fetchProfile } from '../../clients/UserClient';
 import Navbar from '../../components/navbar/navbar';
 import { useSelector } from "react-redux";
 import * as userClient from "../../clients/UserClient";
-import * as followClient from "../../clients/FollowClient";
 import Posts from "../../components/posts/Posts";
 
 export default function Profile({ users,updateFollowing }) {
@@ -36,7 +34,7 @@ export default function Profile({ users,updateFollowing }) {
           console.error("Error fetching following users by ID:", error);
           return [];
         }
-      };
+    };
 
     const handleProfileEdit = () => {
         navigate(`/Profile/${profileId}/ProfileEditor`);
@@ -45,7 +43,7 @@ export default function Profile({ users,updateFollowing }) {
         try {
             setProfileData({
                 username: userProfile.username,
-                identity: userProfile.role,
+                role: userProfile.role,
                 specialty: userProfile.specialty_cuisine,
                 description: userProfile.description,
                 profile_pic: userProfile.profile_pic,
@@ -59,7 +57,6 @@ export default function Profile({ users,updateFollowing }) {
         if (!profileId || !fetchFollowingUsersById) return;
         try {
             const followingUsers = await fetchFollowingUsersById(parseInt(profileId));
-            console.log(followingUsers.length);
             setFollowingCounter(followingUsers.length);
         } catch (error) {
             console.error("Error fetching following count:", error);
@@ -77,7 +74,6 @@ export default function Profile({ users,updateFollowing }) {
 
     const fetchChefPosts = async () => {
         try {
-            console.log(profileId, typeof(profileId));
             setPosts([]);
             const posts = await userClient.fetchChefPosts(parseInt(profileId));
             setPosts(posts);
@@ -100,7 +96,7 @@ return (
     <div className="profile-page">
         <Navbar />
         {(!profileData.username) ? (<div>Loading...</div>) : ( <>
-        {profileData.identity==="Chef" && (
+        {profileData.role==="Chef" && (
             <div id='wd-chef-profile' className="chef-profile">
                 <div className="chef-info">
                     <img src={profileData.cover_pic || "/images/cover2.png"}
@@ -117,7 +113,7 @@ return (
                         </div>
                         <div className='chef-identity'>
                             <span>Identity: </span>
-                            <span>{profileData.identity}</span>
+                            <span>{profileData.role}</span>
                         </div>
                         <div className="chef-cuisine">
                             <span>Specialty Cuisine: </span>
@@ -127,7 +123,9 @@ return (
                             <span>{profileData.description}</span>
                         </div>
                         <div className="chef-follow-count">
-                            Following :  {followingCounter}
+                            <Link to='/following' state={{ profileId }}
+                                  className="link following-count" style={{ cursor: "pointer"}}>
+                            Following: {followingCounter}</Link>
                         </div>  
                     </div>
     
@@ -140,7 +138,7 @@ return (
                                                 handleFollow(); // Directly follow
                                             }
                                         }}>
-                            {isFollowing ? "Following" : <>
+                            {isFollowing ? "Unfollow" : <>
                                 <HiOutlinePlus />
                                 Follow
                             </>}
@@ -178,7 +176,7 @@ return (
             </div>
         )}
         
-        {profileData.identity==="User" && (
+        {profileData.role==="User" && (
             <div id="wd-profile-editor" className="user-profile">
                 <div className="user-profile-container" id="wd-info-edit">
                 <img src={profileData.cover_pic || "/images/cover2.png"} 
@@ -195,8 +193,10 @@ return (
                         <span className="value">{profileData.username}</span>
                     </div>
                     <div className="user-profile-following" id="wd-following">
+                        <Link to='/following' state={{ profileId }}
+                                  className="link following-count" style={{ cursor: "pointer"}}>
                         <span className="label">Following: </span>
-                        <span className="value">{followingCounter}</span>
+                        <span className="value">{followingCounter}</span></Link>
                     </div>
                     <div className="user-profile-description" id="wd-cuisine">
                         <span className="label">Description: </span>

@@ -16,13 +16,8 @@ const Share = () => {
 
   const upload = async () => {
     try {
-      const formData = new FormData();
-      formData.append("file", file);
-      for (let pair of formData.entries()) {
-        console.log(pair[0] + ": " + pair[1]);
-      }
-      const res = await postClient.uploadImg(formData);
-      return res.data;
+      const res = await postClient.uploadImg(file);
+      return res;
     } catch (err) {
       console.log(err);
     }
@@ -43,11 +38,12 @@ const Share = () => {
   );
 
   const handleClick = async (e) => {
+    console.log("Selected file:", file);
     e.preventDefault();
     let imgUrl = "";
     if (file) imgUrl = await upload();
-    console.log("Selected file:", file);
-    mutation.mutate({ content, img: imgUrl });
+    console.log("imgUrl: ", imgUrl);
+    mutation.mutate({ content, image: imgUrl });
     setContent("");
     setFile(null);
   };

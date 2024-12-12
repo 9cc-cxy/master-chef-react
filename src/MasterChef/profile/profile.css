@@ -304,6 +304,28 @@
         z-index: 1;
         filter: blur(1px) brightness(55%) contrast(90%) grayscale(0%) opacity(90%) sepia(20%) drop-shadow(0px 0px 0px #b7b6b6);
     }
+    .edit-icon {
+        position: absolute;
+        bottom: -35px;
+        right: 20px;
+        color: rgba(255, 255, 255, 0.845);
+        font-size: 20px;
+        font-weight: 300;
+        z-index: 3;
+        cursor: pointer;
+    }
+    
+    .cover-edit-icon {
+        position: absolute;
+        bottom: -35px;
+        right: 20px;
+        color: rgba(255, 255, 255, 0.845);
+        font-size: 20px;
+        font-weight: 300;
+        z-index: 3;
+        cursor: pointer;
+        font-size: 28px;
+    }
 
     .infoEdit .profilePhoto {
         width: 150px;
@@ -318,6 +340,7 @@
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
         z-index: 2; 
     }
+
     .infoEditContainer {
         margin-top: 340px;
         display: flex;
@@ -397,4 +420,9 @@
         background-color: #ecececee;
     }
 
+}
+
+.following-count {
+    text-decoration: none;
+    color: inherit;
 }

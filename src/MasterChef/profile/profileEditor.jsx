@@ -3,16 +3,18 @@ import "./profile.css"
 import React, { useState, useEffect } from "react";
 import { CiEdit } from "react-icons/ci";
 import Navbar from '../../components/navbar/navbar';
+import { LiaEdit } from "react-icons/lia";
+import * as userClient from "../../clients/UserClient";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export default function ProfileEditor({ users, updateProfile }) {
     const navigate = useNavigate();
     const { uid } = useParams();
     const userProfile = users.find((user) => user.user_id === parseInt(uid));
-    const [file, setFile] = useState("");
+    const [coverPic, setCoverPic] = useState("");
     const [profile, setProfile] = useState({
         username: "",
         user_password: "",
-        // role: "",
         email: "",
         cover_pic: "",
         profile_pic: "",
@@ -25,7 +27,6 @@ export default function ProfileEditor({ users, updateProfile }) {
                 username: userProfile.username,
                 user_password: userProfile.user_password,
                 email: userProfile.email,
-                // role: userProfile.role,
                 specialty_cuisine: userProfile.specialty_cuisine,
                 description: userProfile.description,
                 profile_pic: userProfile.profile_pic || 'https://images.pexels.com/photos/14028501/pexels-photo-14028501.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load',
@@ -35,16 +36,26 @@ export default function ProfileEditor({ users, updateProfile }) {
             console.error("Error fetching profile data:", error);
         }
     };
-    // const upload = async ()=> {
-    //     try {
-    //         const formData = new FormData()
-    //         formData.append("file", file);
-    //         const res = await makeRequest.post("/upload", formData);
-    //         return res.data;
-    //     } catch (err) {
-    //         console.log(err);
-    //     }
-    // }
+//   const queryClient = useQueryClient();
+
+//   const mutation = useMutation(
+//     (newPost) => {
+//       console.log(newPost);
+//       return userClient.updateProfile(currentUser.user_id, newPost);
+//     },
+//     {
+//       onSuccess: () => {
+//         queryClient.invalidateQueries(["posts"]);
+//       },
+//     });
+//     const uploadCoverPic = async ()=> {
+//         try {
+//             const res = await userClient.uploadImg(coverPic);
+//             return res;
+//         } catch (err) {
+//             console.log(err);
+//         }
+//     }
     const handleChange = (e) => {
         const { name, value } = e.target;
         setProfile((prevProfile) => ({
@@ -52,10 +63,10 @@ export default function ProfileEditor({ users, updateProfile }) {
             [name]: value,
         }));
     };
-    // const handleClick = async (e) => {
+    // const handleCoverEditButton = async (e) => {
     //     e.preventDefault();
     //     let imgUrl = "";
-    //     if (file) imgUrl = await upload();
+    //     if (coverPic) imgUrl = await upload();
     //     mutation.mutate({desc});
     // }
     const [inputType, setInputType] = useState("password");
@@ -68,6 +79,7 @@ export default function ProfileEditor({ users, updateProfile }) {
     const handleBlur = () => {
         setInputType("password");
     };
+
     const handleSave = async () => {
         try {
             console.log("update uid: ", uid, typeof(uid));
@@ -90,11 +102,12 @@ export default function ProfileEditor({ users, updateProfile }) {
                     alt="" 
                     className='cover'
                     name="cover_pic"/>
+                <LiaEdit className="cover-edit-icon" />
                 <img src={profile.profile_pic || "https://images.pexels.com/photos/14028501/pexels-photo-14028501.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" }
                     alt="" 
                     className='profilePhoto'
                     name="profile_pic"/>
-            
+                <LiaEdit className="profilePhoto-edit-icon" />
                 <div className="infoEditContainer" id="wd-info-edit-container">
                     <h1>Personal Information</h1>     
                     <div className="infoEdit-username" id="wd-username-edit">
@@ -117,7 +130,7 @@ export default function ProfileEditor({ users, updateProfile }) {
                     </div>
                     <div className='infoEdit-email' id="wd-email-edit">
                         <span>Email: </span>
-                        <input id="wd-email-edit" name="email" value={profile.email}
+                        <input id="wd-email-edit" className="email infoEdit-email" name="email" value={profile.email}
                             onChange={handleChange}/>
                     </div>
                     {userProfile.role === "Chef" && (

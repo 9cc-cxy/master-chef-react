@@ -20,6 +20,7 @@ import * as userClient from "./clients/UserClient";
 import * as followClient from "./clients/FollowClient";
 import Admin from "./MasterChef/admin/Admin";
 import ProtectedRoute from "./components/routing/ProtectedRoute.jsx";
+import FollowingList from "./MasterChef/profile/FollowingList.jsx";
 
 export default function App() {
   const { currentUser } = useSelector((state) => state.accountReducer);
@@ -115,7 +116,8 @@ export default function App() {
             <Admin />
           </ProtectedRoute>
         }
-      />
+        />
+        <Route path="/following" element={<FollowingList users={users}/>}/>
       </Routes>
     </Router>
   );

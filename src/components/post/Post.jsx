@@ -106,7 +106,7 @@ const Post = ({ post, content }) => {
           <Link to={`/profile/${post.user_id}`} className="profile-link">
             <img
               src={
-                currentUser?.profile_pic ||
+                post?.profile_pic ||
                 "https://images.pexels.com/photos/14028501/pexels-photo-14028501.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
               }
               alt={`${post.username}'s profile`}
@@ -145,7 +145,8 @@ const Post = ({ post, content }) => {
       <div className="post-image">
         {post ? (
           <Link to={`/details/${post.post_id}` } className="no-underline">
-            <img src={pic} alt="Post" />
+            {post.image? (<img src={`/upload/post/${post.image}`} alt="Post" />) : 
+            (<img src={pic} alt="Post" />)}
           </Link>
         ) : (
           <img src={content.image} alt="Post" />

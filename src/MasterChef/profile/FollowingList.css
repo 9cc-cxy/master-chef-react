@@ -1,0 +1,33 @@
+.following-page {
+    margin-top: 10px;
+    margin: 0 auto;
+    width: 100%; 
+    max-width: 1200px;
+    padding: 20px 20px; 
+    font-family: Arial, sans-serif;
+  }
+
+  .following-list {
+    width: 100%;
+    height: 200px;
+    margin: 0 auto;
+    padding-top: 60px;
+    position: relative;
+  }
+  
+  .following-list h2 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
+
+  .chef-infoContainer-following-list {
+    position: absolute;
+    top: 110px;
+    left: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 2;
+    color: white;
+}  

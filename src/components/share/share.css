@@ -25,7 +25,23 @@
       align-items: center;
       gap: 10px;
     }
-
+    .share-left input{
+      color: #767676;
+      font-size: medium;
+      border: none;
+      flex-grow: 1;
+      padding: 8px;
+      outline: none;
+    }
+    .share-left input ::placeholder{
+      color: #88878780;
+      font-size: medium;
+      border: none;
+    }
+    .share-left input:focus {
+      border-color: #5858589d; 
+      box-shadow: 0 0 5px rgba(83, 82, 82, 0.5);
+    }
     .search {
       display: flex;
       align-items: center;
