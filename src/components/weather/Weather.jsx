@@ -9,7 +9,7 @@ const Weather = () => {
     const fetchWeather = async () => {
       try {
         const response = await fetch(
-          `https://api.weatherapi.com/v1/current.json?key=6ef56b7ca1bd45489c7200458240112&q=New York&aqi=no`
+          `https://api.weatherapi.com/v1/current.json?key=6ef56b7ca1bd45489c7200458240112&q=Boston&aqi=no`
         );
 
         if (!response.ok) {
